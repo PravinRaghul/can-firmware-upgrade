@@ -1,0 +1,48 @@
+= CAN firmware upgrade
+
+ A simple test application for firmware upgrade through CAN interface
+ using open source python-can library.
+
+== Requirments
+
+ - python-can
+
+== Configuration
+
+ By default configuration is set to use SocketCAN interface and
+ virtual CAN as channel.
+
+== Protocol
+
+ Protocol for sending firmware bytes through CAN bus is
+ user-defined. By default it uses a simple protocol as follows.,
+
+=== Command packet
+
+  11bit        8bytes
+ <----> <------------------>
+ ++++++ ++++++++++++++++++++
+ | ID | | SIZE |     X     |
+ ++++++ ++++++++++++++++++++
+        <----->
+	 2bytes
+
+ ID   - Firmware upgrade msgid
+ SIZE - Total size of the bytes
+
+=== Data Packet
+
+  11bit        8bytes
+ <----> <------------------>
+ ++++++ ++++++++++++++++++++
+ | ID | | D0 | D1 | ...... |
+ ++++++ ++++++++++++++++++++
+        <----->
+	 2bytes
+
+ ID   - Firmware upgrade msgid
+ D0-D8- Firmware upgrade bytes
+ 
+== Usage
+
+ `python app.py <config-file>`

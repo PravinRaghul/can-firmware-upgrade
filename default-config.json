@@ -1,0 +1,5 @@
+{
+    "CHANNEL" : "vcan0",
+    "INTERFACE": "socketcan",
+    "APPBIN": "user_app.bin"
+}
